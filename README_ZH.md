@@ -1,12 +1,12 @@
-# Tale Blog
+# Tale 博客系统
 
 ![Tale](https://ooo.0o0.ooo/2017/02/27/58b43450c9182.png)
 
-> Tale's English meaning for the **Story**, I believe that every person who insists on writing a blog is a story; Chinese you call it ***Collapse*** does not matter.
+> Tale 的英文含义为**故事**，我相信每个坚持写 Blog 的人都是有故事的；中文你叫它 ***塌了*** 也无所谓 🤣。
 
-`Tale` uses a lightweight mvc framework [Blade](https://github.com/biezhi/blade) for development, the default theme using a beautiful [pinghsu](https://github.com/chakhsu/pinghsu), if you think this project is good, please support it [star]((https://github.com/otale/tale/stargazers)).
+`Tale` 使用了轻量级 mvc 框架 [Blade](https://github.com/biezhi/blade) 开发，默认主题使用了漂亮的 [pinghsu](https://github.com/chakhsu/pinghsu)，如果觉得这个项目不错，请为它[点赞](https://github.com/otale/tale/stargazers)支持。
 
-demo website：https://tale.biezhi.me
+演示站点：https://tale.biezhi.me
 
 [![Build Status](https://img.shields.io/travis/otale/tale.svg?style=flat-square)](https://travis-ci.org/otale/tale)
 ![Version 1.3.1-beta](https://img.shields.io/badge/version-1.3.1-yellow.svg?style=flat-square)
@@ -14,27 +14,24 @@ demo website：https://tale.biezhi.me
 [![@biezhi on zhihu](https://img.shields.io/badge/zhihu-%40biezhi-red.svg?style=flat-square)](https://www.zhihu.com/people/biezhi)
 [![Gitter](https://badges.gitter.im/biezhi/tale-group.svg)](https://gitter.im/tale-group)
 
-[QuickStart](https://github.com/otale/tale/wiki/QuickStart)&nbsp; | &nbsp;[Contribution](https://github.com/otale/tale/issues/new)&nbsp; | &nbsp;[Donate](https://github.com/otale/tale/wiki/9.-%E6%8D%90%E8%B5%A0%E6%88%91%E4%BB%AC)&nbsp; | &nbsp;[Video](https://github.com/otale/tale/wiki/%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B)&nbsp; | &nbsp;[中文](README_ZH.md)
-
-Here is a throughput graph of the repository for the last few weeks:
+[开始使用](https://github.com/otale/tale/wiki)&nbsp; | &nbsp;[参与贡献](https://github.com/otale/tale/wiki/8.-%E5%8F%82%E4%B8%8E%E8%B4%A1%E7%8C%AE)&nbsp; | &nbsp;[捐赠](https://github.com/otale/tale/wiki/9.-%E6%8D%90%E8%B5%A0%E6%88%91%E4%BB%AC)&nbsp; | &nbsp;[视频教程](https://github.com/otale/tale/wiki/%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B)&nbsp; | &nbsp;[English](README.md)
 
 [![Throughput Graph](https://graphs.waffle.io/otale/tale/throughput.svg)](https://waffle.io/otale/tale/metrics/throughput)
 
+## 特性
 
-## Feature
++ 设计简洁，界面美观
++ Markdown 文章发布
++ 自定义文章链接
++ 支持多主题
++ 支持插件扩展
++ 支持 Emoji 表情
++ 支持网易云音乐播放
++ 支持附件和数据库备份
++ 部署简单，不依赖 Tomcat
++ 无需数据库，内嵌 Sqlite
 
-+ Simple design, beautiful interface
-+ Markdown article published
-+ Custom article links
-+ Support multiple themes
-+ Support plugin extension
-+ Support Emoji
-+ Support Netease cloud music player
-+ Support for attachments and database backups
-+ Deployment is simple, do not rely on Tomcat
-+ No database, sqlite embedded
-
-## Interface Preview
+## 界面预览
 
 ![tale1.png](https://ooo.0o0.ooo/2017/03/04/58ba99604e997.png)
 ![tale_022.png](https://ooo.0o0.ooo/2017/02/28/58b4686f37836.png)
@@ -45,11 +42,11 @@ Here is a throughput graph of the repository for the last few weeks:
 ![tale_07.png](https://ooo.0o0.ooo/2017/02/28/58b46868b1a67.png)
 ![tale_08.png](https://ooo.0o0.ooo/2017/02/28/58b46866c5898.png)
 
-## OpenSource Agreement
+## 开源协议
 
 [MIT](LICENSE)
 
-## Thanks
+## 感谢
 
 + [dongm2ez](https://github.com/dongm2ez)
 + [pkwenda](https://github.com/pkwenda)
