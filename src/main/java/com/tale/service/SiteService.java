@@ -217,20 +217,22 @@ public class SiteService {
             backResponse.setTheme_path(themesPath);
         }
         // 备份数据库
-        if ("db".equals(bkType)) {
-            String filePath = "upload/" + DateKit.toString(new Date(), "yyyyMMddHHmmss") + "_" + StringKit.rand(8) + ".db";
-            String cp       = AttachController.CLASSPATH + filePath;
-            Files.createDirectory(Paths.get(cp));
-            Files.copy(Paths.get(SqliteJdbc.DB_PATH), Paths.get(cp));
-            backResponse.setSql_path("/" + filePath);
-            // 10秒后删除备份文件
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    new File(cp).delete();
-                }
-            }, 10 * 1000);
-        }
+		if ("db".equals(bkType)) {
+			String filePath = "upload/" + DateKit.toString(new Date(), "yyyyMMddHHmmss") + "_" + StringKit.rand(8)
+					+ ".db";
+			String cp = AttachController.CLASSPATH + filePath;
+			Files.createDirectory(Paths.get(cp));
+			Files.copy(Paths.get(SqliteJdbc.DB_PATH), Paths.get(cp));
+			//Files.copy(Paths.get("D:/eclipse-workspace/tale/tale.db"), Paths.get(cp));
+			backResponse.setSql_path("/" + filePath);
+			// 10秒后删除备份文件
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					new File(cp).delete();
+				}
+			}, 10 * 1000);
+		}
         return backResponse;
     }
 
