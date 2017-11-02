@@ -24,10 +24,6 @@ public final class Commons {
 
     private static SiteService siteService;
 
-    private static final List EMPTY = new ArrayList(0);
-
-    private static final Random rand = new Random();
-    
     private static final String TEMPLATES = "/templates/";
 
     public static void setSiteService(SiteService ss) {
@@ -43,6 +39,16 @@ public final class Commons {
      */
     public static boolean is_empty(Page paginator) {
         return null == paginator || BladeKit.isEmpty(paginator.getRows());
+    }
+
+    /**
+     * 判断字符串不为空
+     *
+     * @param str
+     * @return
+     */
+    public static boolean not_empty(String str) {
+        return StringKit.isNotBlank(str);
     }
 
     /**
@@ -83,6 +89,15 @@ public final class Commons {
     }
 
     /**
+     * 网站子标题
+     *
+     * @return
+     */
+    public static String site_subtitle() {
+        return site_option("site_subtitle");
+    }
+
+    /**
      * 网站配置项
      *
      * @param key
@@ -108,9 +123,10 @@ public final class Commons {
 
     /**
      * 返回站点设置的描述信息
+     *
      * @return
      */
-    public static String site_description(){
+    public static String site_description() {
         return site_option("site_description");
     }
 
@@ -155,7 +171,10 @@ public final class Commons {
      * @return
      */
     public static String gravatar(String email) {
-        String avatarUrl = "https://secure.gravatar.com/avatar";
+        if (!TaleConst.ENABLED_CDN) {
+            return "/static/admin/images/unicorn.png";
+        }
+        String avatarUrl = "https://cn.gravatar.com/avatar";
         if (StringKit.isBlank(email)) {
             return avatarUrl;
         }
@@ -175,6 +194,7 @@ public final class Commons {
 
     /**
      * 格式化日期
+     *
      * @param date
      * @param fmt
      * @return
@@ -199,26 +219,28 @@ public final class Commons {
 
     /**
      * 获取随机数
+     *
      * @param max
      * @param str
      * @return
      */
-    public static String random(int max, String str){
+    public static String random(int max, String str) {
         return UUID.random(1, max) + str;
     }
 
     /**
      * An :grinning:awesome :smiley:string &#128516;with a few :wink:emojis!
-     *
+     * <p>
      * 这种格式的字符转换为emoji表情
      *
      * @param value
      * @return
      */
-    public static String emoji(String value){
+    public static String emoji(String value) {
         return EmojiParser.parseToUnicode(value);
     }
 
+    private static final Pattern SRC_PATTERN = Pattern.compile("src\\s*=\\s*\'?\"?(.*?)(\'|\"|>|\\s+)");
     /**
      * 获取文章第一张图片
      *
@@ -227,14 +249,14 @@ public final class Commons {
     public static String show_thumb(String content) {
         content = TaleUtils.mdToHtml(content);
         if (content.contains("<img")) {
-            String img = "";
-            String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
-            Pattern p_image = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);
-            Matcher m_image = p_image.matcher(content);
+            String  img       = "";
+            String  regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
+            Pattern p_image   = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);
+            Matcher m_image   = p_image.matcher(content);
             if (m_image.find()) {
                 img = img + "," + m_image.group();
                 // //匹配src
-                Matcher m = Pattern.compile("src\\s*=\\s*\'?\"?(.*?)(\'|\"|>|\\s+)").matcher(img);
+                Matcher m = SRC_PATTERN.matcher(img);
                 if (m.find()) {
                     return m.group(1);
                 }

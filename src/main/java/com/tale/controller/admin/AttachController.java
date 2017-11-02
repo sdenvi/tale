@@ -79,7 +79,7 @@ public class AttachController extends BaseController {
     @JSON
     public RestResponse upload(Request request) {
 
-        log.info("UPLOAD DIR = {}", TaleUtils.upDir);
+        log.info("UPLOAD DIR = {}", TaleUtils.UP_DIR);
 
         Users                 users       = this.user();
         Integer               uid         = users.getUid();
@@ -95,7 +95,7 @@ public class AttachController extends BaseController {
                     String fkey = TaleUtils.getFileKey(fname);
 
                     String ftype    = f.getContentType().contains("image") ? Types.IMAGE : Types.FILE;
-                    String filePath = TaleUtils.upDir + fkey;
+                    String filePath = TaleUtils.UP_DIR + fkey;
 
                     try {
                         Files.write(Paths.get(filePath), f.getData());
@@ -138,20 +138,27 @@ public class AttachController extends BaseController {
     @JSON
     public RestResponse delete(@Param Integer id, Request request) {
         try {
-            Attach attach = new Attach();
-            Attach temp   = attach.find(id);
-            if (null == temp) {
+            Attach attach = new Attach().find(id);
+            if (null == attach) {
                 return RestResponse.fail("不存在该附件");
             }
-            attach.delete(id);
+            String fkey = attach.getFkey();
             siteService.cleanCache(Types.C_STATISTICS);
-            String upDir = CLASSPATH.substring(0, CLASSPATH.length() - 1);
-            Files.delete(Paths.get(upDir + attach.getFkey()));
-            new Logs(LogActions.DEL_ATTACH, attach.getFkey(), request.address(), this.getUid()).save();
+            String             filePath = CLASSPATH.substring(0, CLASSPATH.length() - 1) + fkey;
+            java.nio.file.Path path     = Paths.get(filePath);
+            log.info("Delete attach: [{}]", filePath);
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+            attach.delete(id);
+            new Logs(LogActions.DEL_ATTACH, fkey, request.address(), this.getUid()).save();
         } catch (Exception e) {
             String msg = "附件删除失败";
-            if (e instanceof TipException) msg = e.getMessage();
-            else log.error(msg, e);
+            if (e instanceof TipException) {
+                msg = e.getMessage();
+            } else {
+                log.error(msg, e);
+            }
             return RestResponse.fail(msg);
         }
         return RestResponse.ok();
